@@ -3,7 +3,7 @@ import axios from 'axios';
 //asitdebata96@gmail.com
 const apikey1 = process.env.REACT_APP_API1;
 //asit.debata@hotmail.com
-const apikey2 = '6RDOJU4Z6B1VM48H';
+const apikey2 = process.env.REACT_APP_API2;
 const symbol = 'RELIANCE';
 
 console.log(apikey1);
@@ -14,7 +14,7 @@ const mainAPI = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_AD
 export const fetchSearchQuery = async (data) => {
   return await axios
     .get(
-      `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${data}&apikey=${apikey1}`
+      `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${data}&apikey=${apikey2}`
     )
     .then((response) => {
       return response;
