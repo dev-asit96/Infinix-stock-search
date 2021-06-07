@@ -1,0 +1,39 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+}
+.image-logo {
+  height: 119px;
+  width: 9%;
+}
+.MuiFormControl-root {
+  width: 227px !important;
+  border: 0;
+  margin: 0;
+  display: inline-flex;
+  padding: 0;
+  position: relative;
+  min-width: 0;
+  flex-direction: column;
+  vertical-align: top;
+}
+.stock-name {
+  margin-top: 25px;
+  font-weight: 300;
+}
+.suggestion {
+  width: 226px;
+
+  margin-top: 0px;
+}
+
+.stock-name-suggestion {
+  padding: 5px 0;
+  font-size: 15px;
+  border: 0.5px solid white;
+}
+
+
