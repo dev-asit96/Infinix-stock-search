@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { fetchSearchQuery } from './helper/Apicall';
-import Autocomplete, {
-  
-} from '@material-ui/lab/Autocomplete';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 export default function FreeSoloCreateOptionDialog(props) {
   const [value, setValue] = React.useState(null);
@@ -58,7 +56,6 @@ export default function FreeSoloCreateOptionDialog(props) {
         selectOnFocus
         onChange={(event, value) => {
           props.inputSearchStock(value);
-          console.log(value);
           setSelectedStock(value);
         }}
         clearOnBlur

@@ -6,8 +6,6 @@ const apikey1 = process.env.REACT_APP_API1;
 const apikey2 = process.env.REACT_APP_API2;
 const symbol = 'RELIANCE';
 
-console.log(apikey1);
-
 const mainAPI = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}.BSE&outputsize=full&apikey=${apikey1}`;
 
 //api call for search input suggestion

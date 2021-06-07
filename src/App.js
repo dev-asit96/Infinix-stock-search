@@ -3,6 +3,7 @@ import Box from '@material-ui/core/Box';
 import { fetchSearchQuery, searchStockInformation } from './helper/Apicall';
 import SearchInput from './SearchInput';
 import Table from '@material-ui/core/Table';
+import Moment from 'moment';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -48,9 +49,7 @@ const App = () => {
     const fetchTableData = () => {
       searchStockInformation(searchStock).then((response) => {
         //store stock name
-        // setStock(response.data['Meta Data']['2. Symbol']);
         var responseData = response.data;
-        console.log(responseData);
         //Create an empty array
         var arrayData = [];
         var objectResponse = Object.entries(
@@ -58,13 +57,13 @@ const App = () => {
         );
         //Object creation
         objectResponse.map((data, index) => {
-          if (index < 10) {
+          if (index < 13) {
             var object = {
-              date: data[0],
-              open: data[1]['1. open'],
-              close: data[1]['4. close'],
+              date: Moment(data[0]).format('DD-MM-YY'),
+              open: parseFloat(data[1]['1. open']).toFixed(2),
+              close: parseFloat(data[1]['4. close']).toFixed(2),
             };
-            console.log(object);
+
             arrayData.push(object);
           }
         });
@@ -93,7 +92,7 @@ const App = () => {
             setSearchStock(stock);
           }}
         />
-        
+
         <div className='stock-name'>{searchStock}</div>
       </Box>
 
