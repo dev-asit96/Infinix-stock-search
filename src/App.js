@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import Box from '@material-ui/core/Box';
-import { fetchSearchQuery, searchStockInformation } from './helper/Apicall';
+import {
+  Box,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  withStyles,
+  makeStyles,
+} from '@material-ui/core';
+import { searchStockInformation } from './helper/Apicall';
 import SearchInput from './SearchInput';
-import Table from '@material-ui/core/Table';
 import Moment from 'moment';
-import { withStyles, makeStyles } from '@material-ui/core/styles';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 import './App.css';
 
 const StyledTableCell = withStyles((theme) => ({
@@ -32,10 +35,8 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 const App = () => {
-  //const [stock, setStock] = useState('');
-  const [searchStock, setSearchStock] = useState('RELIANCE.BSE');
-  const [stockData, setStockData] = useState([]);
-  //const [stockSearch, setStockSearch] = useState('RELIANCE.BSE');
+  const [searchStock, setSearchStock] = useState('RELIANCE.XBOM');
+  const [stockData, setStockData] = useState([{}]);
 
   const useStyles = makeStyles({
     table: {
@@ -44,26 +45,22 @@ const App = () => {
   });
 
   const classes = useStyles();
+
   useEffect(() => {
     //Fetch the Stock Name and Table Data(Actual Stock Information)
     const fetchTableData = () => {
       searchStockInformation(searchStock).then((response) => {
         //store stock name
-        var responseData = response.data;
-        //Create an empty array
+        var responseData = response.data.data;
+       
         var arrayData = [];
-        var objectResponse = Object.entries(
-          responseData['Time Series (Daily)']
-        );
-        //Object creation
-        objectResponse.map((data, index) => {
-          if (index < 13) {
+        responseData.map((data, index) => {
+          if (index <= 10) {
             var object = {
-              date: Moment(data[0]).format('DD-MM-YY'),
-              open: parseFloat(data[1]['1. open']).toFixed(2),
-              close: parseFloat(data[1]['4. close']).toFixed(2),
+              date: Moment(data.date).format('DD-MM-YYYY'),
+              open: data.open.toFixed(2),
+              close: data.close.toFixed(2),
             };
-
             arrayData.push(object);
           }
         });
@@ -89,6 +86,7 @@ const App = () => {
       >
         <SearchInput
           inputSearchStock={(stock) => {
+            console.log(stock);
             setSearchStock(stock);
           }}
         />

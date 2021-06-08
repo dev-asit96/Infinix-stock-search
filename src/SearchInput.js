@@ -12,14 +12,15 @@ export default function FreeSoloCreateOptionDialog(props) {
   const handleChange = (searchValue) => {
     const inputQuery = searchValue;
     fetchSearchQuery(inputQuery).then((res) => {
-      var list = res.data.bestMatches;
+      var responseData = res.data;
+      console.log(responseData.data);
+      var arrayOfSearchQueries = responseData.data;
       var arrayofMatches = [];
-      if (res.data.bestMatches) {
-        list.map((data, index) => {
-          arrayofMatches.push(data['1. symbol']);
-        });
-        setSearchList(arrayofMatches);
-      }
+      arrayOfSearchQueries.map((data, index) => {
+        console.log(data.symbol);
+        arrayofMatches.push(data.symbol);
+      });
+      setSearchList(arrayofMatches);
     });
   };
 

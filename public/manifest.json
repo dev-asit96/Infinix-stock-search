@@ -1,12 +1,7 @@
 {
   "short_name": "Infinix",
-  "name": "infinix Stock Search PWA",
+  "name": "Infinix",
   "icons": [
-    {
-      "src": "/icons/maskable_icon_x48.png",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
     {
       "src": "/icons/maskable_icon_x192.png",
       "type": "image/png",
@@ -16,7 +11,8 @@
     {
       "src": "/icons/maskable_icon_x512.png",
       "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",
