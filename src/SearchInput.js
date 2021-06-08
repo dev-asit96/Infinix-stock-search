@@ -61,9 +61,6 @@ export default function FreeSoloCreateOptionDialog(props) {
           console.log(value);
           searchList.map((data, index) => {
             if (value === data.name) {
-              console.log(data.name);
-              console.log(data.symbol);
-
               props.inputSearchStock(data.symbol);
               props.inputStockName(data.name);
             }
