@@ -6,7 +6,6 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 export default function FreeSoloCreateOptionDialog(props) {
   const [value, setValue] = React.useState(null);
   const [open, toggleOpen] = React.useState(false);
-  const [selectedStock, setSelectedStock] = useState('');
   const [searchList, setSearchList] = useState([]);
 
   const handleChange = (searchValue) => {
