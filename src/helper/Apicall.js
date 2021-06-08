@@ -14,7 +14,6 @@ const marketStackApikey2 = process.env.REACT_APP_MARKETSTACK_API2;
 
 const symbol = 'RELIANCE';
 
-const marketStackLink = `http://api.marketstack.com/v1/tickers?access_key=${marketStackApikey1}&search=reliance`;
 const mainAPI = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${symbol}.BSE&outputsize=full&apikey=${apikey1}`;
 
 //api call for search input suggestion

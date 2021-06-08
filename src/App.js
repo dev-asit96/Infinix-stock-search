@@ -82,6 +82,7 @@ const App = () => {
         justifyContent='center'
         marginBottom={3}
         p={1}
+        
         flexDirection='column'
         alignItems='center'
       >
