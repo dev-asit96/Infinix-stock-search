@@ -36,6 +36,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 const App = () => {
   const [searchStock, setSearchStock] = useState('RELIANCE.XBOM');
+  const [stockName, setStockName] = useState('RELIANCE INDUSTRIES LTD.');
   const [stockData, setStockData] = useState([{}]);
 
   const useStyles = makeStyles({
@@ -52,7 +53,7 @@ const App = () => {
       searchStockInformation(searchStock).then((response) => {
         //store stock name
         var responseData = response.data.data;
-       
+
         var arrayData = [];
         responseData.map((data, index) => {
           if (index <= 10) {
@@ -85,13 +86,11 @@ const App = () => {
         alignItems='center'
       >
         <SearchInput
-          inputSearchStock={(stock) => {
-            console.log(stock);
-            setSearchStock(stock);
-          }}
+          inputStockName={(stockName) => setStockName(stockName)}
+          inputSearchStock={(stock) => setSearchStock(stock)}
         />
 
-        <div className='stock-name'>{searchStock}</div>
+        <div className='stock-name'>{stockName}</div>
       </Box>
 
       {/* Table goes here */}

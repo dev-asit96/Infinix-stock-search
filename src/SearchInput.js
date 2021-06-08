@@ -13,12 +13,14 @@ export default function FreeSoloCreateOptionDialog(props) {
     const inputQuery = searchValue;
     fetchSearchQuery(inputQuery).then((res) => {
       var responseData = res.data;
-      console.log(responseData.data);
       var arrayOfSearchQueries = responseData.data;
       var arrayofMatches = [];
       arrayOfSearchQueries.map((data, index) => {
-        console.log(data.symbol);
-        arrayofMatches.push(data.symbol);
+        const objectOfNameAndSymbol = {
+          name: data.name,
+          symbol: data.symbol,
+        };
+        arrayofMatches.push(objectOfNameAndSymbol);
       });
       setSearchList(arrayofMatches);
     });
@@ -53,11 +55,19 @@ export default function FreeSoloCreateOptionDialog(props) {
       <Autocomplete
         value={value}
         id='free-solo-dialog-demo'
-        options={searchList}
+        options={searchList.map((data) => data.name)}
         selectOnFocus
         onChange={(event, value) => {
-          props.inputSearchStock(value);
-          setSelectedStock(value);
+          console.log(value);
+          searchList.map((data, index) => {
+            if (value === data.name) {
+              console.log(data.name);
+              console.log(data.symbol);
+
+              props.inputSearchStock(data.symbol);
+              props.inputStockName(data.name);
+            }
+          });
         }}
         clearOnBlur
         handleHomeEndKeys
