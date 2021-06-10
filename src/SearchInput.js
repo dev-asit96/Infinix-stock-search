@@ -12,6 +12,7 @@ export default function FreeSoloCreateOptionDialog(props) {
     const inputQuery = searchValue;
     fetchSearchQuery(inputQuery).then((res) => {
       var responseData = res.data;
+
       var arrayOfSearchQueries = responseData.data;
       var arrayofMatches = [];
       arrayOfSearchQueries.map((data, index) => {
@@ -57,6 +58,7 @@ export default function FreeSoloCreateOptionDialog(props) {
         options={searchList.map((data) => data.name)}
         selectOnFocus
         onChange={(event, value) => {
+          console.log('Inside the Onchange of Autocomplete Text field.');
           searchList.map((data, index) => {
             if (value === data.name) {
               props.inputSearchStock(data.symbol);

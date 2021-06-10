@@ -11,10 +11,12 @@ import {
   withStyles,
   makeStyles,
 } from '@material-ui/core';
-import { searchStockInformation } from './helper/Apicall';
+import { Offline, Online } from 'react-detect-offline';
+
 import SearchInput from './SearchInput';
 import Moment from 'moment';
 import './App.css';
+import axios from 'axios';
 
 const StyledTableCell = withStyles((theme) => ({
   head: {
@@ -49,24 +51,33 @@ const App = () => {
 
   useEffect(() => {
     //Fetch the Stock Name and Table Data(Actual Stock Information)
-    const fetchTableData = () => {
-      searchStockInformation(searchStock).then((response) => {
-        //store stock name
-        var responseData = response.data.data;
+    const fetchTableData = async () => {
+      let apiUrl = `http://api.marketstack.com/v1/eod?access_key=${process.env.REACT_APP_MARKETSTACK_API1}&symbols=${searchStock}`;
+      await axios
+        .get(apiUrl)
+        .then((response) => {
+          //store stock name
 
-        var arrayData = [];
-        responseData.map((data, index) => {
-          if (index <= 10) {
-            var object = {
-              date: Moment(data.date).format('DD-MM-YYYY'),
-              open: data.open.toFixed(2),
-              close: data.close.toFixed(2),
-            };
-            arrayData.push(object);
-          }
+          var responseData = response.data.data;
+          var arrayData = [];
+          responseData.map((data, index) => {
+            if (index <= 10) {
+              var object = {
+                date: Moment(data.date).format('DD-MM-YYYY'),
+                open: data.open.toFixed(2),
+                close: data.close.toFixed(2),
+              };
+              arrayData.push(object);
+            }
+          });
+          setStockData(arrayData);
+          //Save the data into local storage
+          localStorage.setItem('stock', JSON.stringify(arrayData));
+        })
+        .catch((error) => {
+          let collection = localStorage.getItem('stock');
+          setStockData(JSON.parse(collection));
         });
-        setStockData(arrayData);
-      });
     };
     fetchTableData();
   }, [searchStock]);
@@ -76,13 +87,12 @@ const App = () => {
       <div className='header'>
         <h2>Infinix - Stock Tracker</h2>
       </div>
-
+      <Offline>You are in offline mode</Offline>
       <Box
         display='flex'
         justifyContent='center'
         marginBottom={3}
         p={1}
-        
         flexDirection='column'
         alignItems='center'
       >
