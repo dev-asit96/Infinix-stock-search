@@ -10,9 +10,9 @@ import {
   Paper,
   withStyles,
   makeStyles,
-} from '@material-ui/core';
+} from '@material-ui/core/';
+import Alert from '@material-ui/lab/Alert';
 import { Offline, Online } from 'react-detect-offline';
-
 import SearchInput from './SearchInput';
 import Moment from 'moment';
 import './App.css';
@@ -40,6 +40,7 @@ const App = () => {
   const [searchStock, setSearchStock] = useState('RELIANCE.XBOM');
   const [stockName, setStockName] = useState('RELIANCE INDUSTRIES LTD.');
   const [stockData, setStockData] = useState([{}]);
+  const [mode, setMode] = useState('online');
 
   const useStyles = makeStyles({
     table: {
@@ -57,7 +58,8 @@ const App = () => {
         .get(apiUrl)
         .then((response) => {
           //store stock name
-
+          console.log('onlline');
+          setMode('online');
           var responseData = response.data.data;
           var arrayData = [];
           responseData.map((data, index) => {
@@ -75,6 +77,9 @@ const App = () => {
           localStorage.setItem('stock', JSON.stringify(arrayData));
         })
         .catch((error) => {
+          setMode('offline');
+          console.log(error);
+          console.log('offline');
           let collection = localStorage.getItem('stock');
           setStockData(JSON.parse(collection));
         });
@@ -87,7 +92,13 @@ const App = () => {
       <div className='header'>
         <h2>Infinix - Stock Tracker</h2>
       </div>
-      <Offline>You are in offline mode</Offline>
+
+      <div>
+        {mode === 'offline' ? (
+          <Alert severity='warning'>You're in offline mode</Alert>
+        ) : null}
+      </div>
+
       <Box
         display='flex'
         justifyContent='center'

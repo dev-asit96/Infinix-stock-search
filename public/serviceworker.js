@@ -1,6 +1,5 @@
 const CACHE_NAME = 'version-1';
 
-
 //Install Service Worker
 self.addEventListener('install', (event) => {
   event.waitUntil(
@@ -21,6 +20,7 @@ self.addEventListener('install', (event) => {
         'static/js/main.ab4f030f.chunk.js',
         'static/js/2.b70d1a75.chunk.js',
         'static/js/main.db88c4e7.chunk.js',
+        'static/js/vendors~main.chunk.js.map',
       ]);
     })
   );
@@ -28,11 +28,15 @@ self.addEventListener('install', (event) => {
 
 //Listen for requests
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request).then((result) => {
-      if (result) {
-        return result;
-      }
-    })
-  );
+  if (!navigator.onLine) {
+    event.respondWith(
+      caches.match(event.request).then((result) => {
+        if (result) {
+          return result;
+        }
+        let requestUrl = event.request.clone();
+        return fetch(requestUrl);
+      })
+    );
+  }
 });
