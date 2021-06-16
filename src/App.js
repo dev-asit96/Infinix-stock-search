@@ -58,7 +58,6 @@ const App = () => {
         .get(apiUrl)
         .then((response) => {
           //store stock name
-          console.log('onlline');
           setMode('online');
           var responseData = response.data.data;
           var arrayData = [];

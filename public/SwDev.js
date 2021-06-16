@@ -1,4 +1,4 @@
-function SwDev() {
+function swDev() {
   let swUrl = `${process.env.PUBLIC_URL}/serviceworker.js`;
 
   navigator.serviceWorker.register(swUrl).then((response) => {
@@ -6,4 +6,4 @@ function SwDev() {
   });
 }
 
-export default SwDev;
+export default swDev;

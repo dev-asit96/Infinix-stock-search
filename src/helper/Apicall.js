@@ -11,7 +11,6 @@ import axios from 'axios';
 // const marketStackApikey1 = process.env.REACT_APP_MARKETSTACK_API1;
 //asit_debata@hotmail.com
 const marketStackApikey2 = process.env.REACT_APP_MARKETSTACK_API2;
-console.log(marketStackApikey2);
 
 //const symbol = 'RELIANCE';
 
