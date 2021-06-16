@@ -8,9 +8,10 @@ import axios from 'axios';
 
 // Market Stack APIs
 //asitdebata96@gmail.com
-const marketStackApikey1 = process.env.REACT_APP_MARKETSTACK_API1;
+// const marketStackApikey1 = process.env.REACT_APP_MARKETSTACK_API1;
 //asit_debata@hotmail.com
-//const marketStackApikey2 = process.env.REACT_APP_MARKETSTACK_API2;
+const marketStackApikey2 = process.env.REACT_APP_MARKETSTACK_API2;
+console.log(marketStackApikey2);
 
 //const symbol = 'RELIANCE';
 
@@ -19,14 +20,14 @@ const marketStackApikey1 = process.env.REACT_APP_MARKETSTACK_API1;
 //api call for search input suggestion
 export const fetchSearchQuery = async (query) => {
   // const api = `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${query}&apikey=${apikey2}`;
-  const api = `http://api.marketstack.com/v1/tickers?access_key=${marketStackApikey1}&search=${query}`;
+  const api = `http://api.marketstack.com/v1/tickers?access_key=${marketStackApikey2}&search=${query}`;
   return await axios.get(api).then((response) => {
     return response;
   });
 };
 
 export const searchStockInformation = async (stock) => {
-  const api = `http://api.marketstack.com/v1/eod?access_key=${marketStackApikey1}&symbols=${stock}`;
+  const api = `http://api.marketstack.com/v1/eod?access_key=${marketStackApikey2}&symbols=${stock}`;
   return await axios.get(api).then((res) => {
     return res;
   });

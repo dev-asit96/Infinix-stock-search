@@ -53,7 +53,7 @@ const App = () => {
   useEffect(() => {
     //Fetch the Stock Name and Table Data(Actual Stock Information)
     const fetchTableData = async () => {
-      let apiUrl = `http://api.marketstack.com/v1/eod?access_key=${process.env.REACT_APP_MARKETSTACK_API1}&symbols=${searchStock}`;
+      let apiUrl = `http://api.marketstack.com/v1/eod?access_key=${process.env.REACT_APP_MARKETSTACK_API2}&symbols=${searchStock}`;
       await axios
         .get(apiUrl)
         .then((response) => {
@@ -93,12 +93,9 @@ const App = () => {
         <h2>Infinix - Stock Tracker</h2>
       </div>
 
-      <div>
-        {mode === 'offline' ? (
-          <Alert severity='warning'>You're in offline mode</Alert>
-        ) : null}
-      </div>
-
+      <Offline>
+        <Alert severity='warning'>You're in offline mode</Alert>
+      </Offline>
       <Box
         display='flex'
         justifyContent='center'

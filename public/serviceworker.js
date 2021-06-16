@@ -21,6 +21,8 @@ self.addEventListener('install', (event) => {
         'static/js/2.b70d1a75.chunk.js',
         'static/js/main.db88c4e7.chunk.js',
         'static/js/vendors~main.chunk.js.map',
+        'static/js/2.2b0e02ce.chunk.js',
+        'static/js/main.c2872dc3.chunk.js',
       ]);
     })
   );
